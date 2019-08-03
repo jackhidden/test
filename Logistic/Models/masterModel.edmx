@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="masterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Districts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="NameInThai" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameInEnglish" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExcelData">
+          <Key>
+            <PropertyRef Name="DataId" />
+          </Key>
+          <Property Name="DataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExcelId" Type="int" />
+          <Property Name="No" Type="int" />
+          <Property Name="Crossdock" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PO_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="APC_Order" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeliverId" Type="nvarchar" MaxLength="100" />
+          <Property Name="StoreId" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProductId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductDetail" Type="nvarchar" MaxLength="200" />
+          <Property Name="Box" Type="int" />
+          <Property Name="Piece" Type="int" />
+          <Property Name="CBM" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Week" Type="nchar" MaxLength="10" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ExcelFile">
+          <Key>
+            <PropertyRef Name="ExcelId" />
+          </Key>
+          <Property Name="ExcelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameFile" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreateTime" Type="date" />
+          <Property Name="UploadTime" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExclusiveCompany">
+          <Key>
+            <PropertyRef Name="ExclusiveId" />
+          </Key>
+          <Property Name="ExclusiveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExclusiveId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Provinces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="NameInThai" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameInEnglish" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RatePrice">
+          <Key>
+            <PropertyRef Name="RateId" />
+          </Key>
+          <Property Name="RateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No" Type="int" />
+          <Property Name="ExclusiveId" Type="int" />
+          <Property Name="Exclusive" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinceId" Type="int" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="RatePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subdistricts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="NameInThai" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameInEnglish" Type="nvarchar" MaxLength="150" />
+          <Property Name="Latitude" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="ZipCode" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="int" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Districts_Provinces">
+          <End Role="Provinces" Type="Self.Provinces" Multiplicity="1" />
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provinces">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExcelData1_ExcelData1">
+          <End Role="ExcelData" Type="Self.ExcelData" Multiplicity="1" />
+          <End Role="ExcelData1" Type="Self.ExcelData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExcelData">
+              <PropertyRef Name="DataId" />
+            </Principal>
+            <Dependent Role="ExcelData1">
+              <PropertyRef Name="DataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExcelFile_ExcelFile">
+          <End Role="ExcelFile" Type="Self.ExcelFile" Multiplicity="1" />
+          <End Role="ExcelFile1" Type="Self.ExcelFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExcelFile">
+              <PropertyRef Name="ExcelId" />
+            </Principal>
+            <Dependent Role="ExcelFile1">
+              <PropertyRef Name="ExcelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExclusiveCompany_ExclusiveCompany">
+          <End Role="ExclusiveCompany" Type="Self.ExclusiveCompany" Multiplicity="1" />
+          <End Role="ExclusiveCompany1" Type="Self.ExclusiveCompany" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExclusiveCompany">
+              <PropertyRef Name="ExclusiveId" />
+            </Principal>
+            <Dependent Role="ExclusiveCompany1">
+              <PropertyRef Name="ExclusiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item1" Type="Self.Item" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="Item1">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RatePrice_RatePrice">
+          <End Role="RatePrice" Type="Self.RatePrice" Multiplicity="1" />
+          <End Role="RatePrice1" Type="Self.RatePrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RatePrice">
+              <PropertyRef Name="RateId" />
+            </Principal>
+            <Dependent Role="RatePrice1">
+              <PropertyRef Name="RateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subdistricts_Districts">
+          <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
+          <End Role="Subdistricts" Type="Self.Subdistricts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subdistricts">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile1" Type="Self.UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfile1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="masterModelStoreContainer">
+          <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExcelData" EntityType="Self.ExcelData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExcelFile" EntityType="Self.ExcelFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExclusiveCompany" EntityType="Self.ExclusiveCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provinces" EntityType="Self.Provinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RatePrice" EntityType="Self.RatePrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subdistricts" EntityType="Self.Subdistricts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Districts_Provinces" Association="Self.FK_Districts_Provinces">
+            <End Role="Provinces" EntitySet="Provinces" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExcelData1_ExcelData1" Association="Self.FK_ExcelData1_ExcelData1">
+            <End Role="ExcelData" EntitySet="ExcelData" />
+            <End Role="ExcelData1" EntitySet="ExcelData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExcelFile_ExcelFile" Association="Self.FK_ExcelFile_ExcelFile">
+            <End Role="ExcelFile" EntitySet="ExcelFile" />
+            <End Role="ExcelFile1" EntitySet="ExcelFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExclusiveCompany_ExclusiveCompany" Association="Self.FK_ExclusiveCompany_ExclusiveCompany">
+            <End Role="ExclusiveCompany" EntitySet="ExclusiveCompany" />
+            <End Role="ExclusiveCompany1" EntitySet="ExclusiveCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item1" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RatePrice_RatePrice" Association="Self.FK_RatePrice_RatePrice">
+            <End Role="RatePrice" EntitySet="RatePrice" />
+            <End Role="RatePrice1" EntitySet="RatePrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subdistricts_Districts" Association="Self.FK_Subdistricts_Districts">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Subdistricts" EntitySet="Subdistricts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_UserProfile" Association="Self.FK_UserProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserProfile1" EntitySet="UserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Districts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="NameInThai" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameInEnglish" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provinces" Relationship="Self.FK_Districts_Provinces" FromRole="Districts" ToRole="Provinces" />
+          <NavigationProperty Name="Subdistricts" Relationship="Self.FK_Subdistricts_Districts" FromRole="Districts" ToRole="Subdistricts" />
+        </EntityType>
+        <EntityType Name="ExcelData">
+          <Key>
+            <PropertyRef Name="DataId" />
+          </Key>
+          <Property Name="DataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExcelId" Type="Int32" />
+          <Property Name="No" Type="Int32" />
+          <Property Name="Crossdock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APC_Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeliverId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StoreId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StoreName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDetail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Box" Type="Int32" />
+          <Property Name="Piece" Type="Int32" />
+          <Property Name="CBM" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Week" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="ExcelData1" Relationship="Self.FK_ExcelData1_ExcelData1" FromRole="ExcelData" ToRole="ExcelData1" />
+          <NavigationProperty Name="ExcelData2" Relationship="Self.FK_ExcelData1_ExcelData1" FromRole="ExcelData1" ToRole="ExcelData" />
+        </EntityType>
+        <EntityType Name="ExcelFile">
+          <Key>
+            <PropertyRef Name="ExcelId" />
+          </Key>
+          <Property Name="ExcelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="0" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Employee" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ExcelFile1" Relationship="Self.FK_ExcelFile_ExcelFile" FromRole="ExcelFile" ToRole="ExcelFile1" />
+          <NavigationProperty Name="ExcelFile2" Relationship="Self.FK_ExcelFile_ExcelFile" FromRole="ExcelFile1" ToRole="ExcelFile" />
+        </EntityType>
+        <EntityType Name="ExclusiveCompany">
+          <Key>
+            <PropertyRef Name="ExclusiveId" />
+          </Key>
+          <Property Name="ExclusiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="ExclusiveCompany1" Relationship="Self.FK_ExclusiveCompany_ExclusiveCompany" FromRole="ExclusiveCompany" ToRole="ExclusiveCompany1" />
+          <NavigationProperty Name="ExclusiveCompany2" Relationship="Self.FK_ExclusiveCompany_ExclusiveCompany" FromRole="ExclusiveCompany1" ToRole="ExclusiveCompany" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExclusiveId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Item1" Relationship="Self.FK_Item_Item" FromRole="Item" ToRole="Item1" />
+          <NavigationProperty Name="Item2" Relationship="Self.FK_Item_Item" FromRole="Item1" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Provinces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="NameInThai" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameInEnglish" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_Districts_Provinces" FromRole="Provinces" ToRole="Districts" />
+        </EntityType>
+        <EntityType Name="RatePrice">
+          <Key>
+            <PropertyRef Name="RateId" />
+          </Key>
+          <Property Name="RateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="Int32" />
+          <Property Name="ExclusiveId" Type="Int32" />
+          <Property Name="Exclusive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RatePrice1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="RatePrice11" Relationship="Self.FK_RatePrice_RatePrice" FromRole="RatePrice" ToRole="RatePrice1" />
+          <NavigationProperty Name="RatePrice2" Relationship="Self.FK_RatePrice_RatePrice" FromRole="RatePrice1" ToRole="RatePrice" />
+        </EntityType>
+        <EntityType Name="Subdistricts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="NameInThai" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameInEnglish" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="ZipCode" Type="Int32" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_Subdistricts_Districts" FromRole="Subdistricts" ToRole="Districts" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="UserProfile1" Relationship="Self.FK_UserProfile_UserProfile" FromRole="UserProfile" ToRole="UserProfile1" />
+          <NavigationProperty Name="UserProfile2" Relationship="Self.FK_UserProfile_UserProfile" FromRole="UserProfile1" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Districts_Provinces">
+          <End Role="Provinces" Type="Self.Provinces" Multiplicity="1" />
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provinces">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subdistricts_Districts">
+          <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
+          <End Role="Subdistricts" Type="Self.Subdistricts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subdistricts">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExcelData1_ExcelData1">
+          <End Role="ExcelData" Type="Self.ExcelData" Multiplicity="1" />
+          <End Role="ExcelData1" Type="Self.ExcelData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExcelData">
+              <PropertyRef Name="DataId" />
+            </Principal>
+            <Dependent Role="ExcelData1">
+              <PropertyRef Name="DataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExcelFile_ExcelFile">
+          <End Role="ExcelFile" Type="Self.ExcelFile" Multiplicity="1" />
+          <End Role="ExcelFile1" Type="Self.ExcelFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExcelFile">
+              <PropertyRef Name="ExcelId" />
+            </Principal>
+            <Dependent Role="ExcelFile1">
+              <PropertyRef Name="ExcelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExclusiveCompany_ExclusiveCompany">
+          <End Role="ExclusiveCompany" Type="Self.ExclusiveCompany" Multiplicity="1" />
+          <End Role="ExclusiveCompany1" Type="Self.ExclusiveCompany" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExclusiveCompany">
+              <PropertyRef Name="ExclusiveId" />
+            </Principal>
+            <Dependent Role="ExclusiveCompany1">
+              <PropertyRef Name="ExclusiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item1" Type="Self.Item" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="Item1">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RatePrice_RatePrice">
+          <End Role="RatePrice" Type="Self.RatePrice" Multiplicity="1" />
+          <End Role="RatePrice1" Type="Self.RatePrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RatePrice">
+              <PropertyRef Name="RateId" />
+            </Principal>
+            <Dependent Role="RatePrice1">
+              <PropertyRef Name="RateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile1" Type="Self.UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfile1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="Self.Districts" />
+          <EntitySet Name="ExcelData" EntityType="Self.ExcelData" />
+          <EntitySet Name="ExcelFile" EntityType="Self.ExcelFile" />
+          <EntitySet Name="ExclusiveCompany" EntityType="Self.ExclusiveCompany" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="Provinces" EntityType="Self.Provinces" />
+          <EntitySet Name="RatePrice" EntityType="Self.RatePrice" />
+          <EntitySet Name="Subdistricts" EntityType="Self.Subdistricts" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
+          <AssociationSet Name="FK_Districts_Provinces" Association="Self.FK_Districts_Provinces">
+            <End Role="Provinces" EntitySet="Provinces" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subdistricts_Districts" Association="Self.FK_Subdistricts_Districts">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Subdistricts" EntitySet="Subdistricts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExcelData1_ExcelData1" Association="Self.FK_ExcelData1_ExcelData1">
+            <End Role="ExcelData" EntitySet="ExcelData" />
+            <End Role="ExcelData1" EntitySet="ExcelData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExcelFile_ExcelFile" Association="Self.FK_ExcelFile_ExcelFile">
+            <End Role="ExcelFile" EntitySet="ExcelFile" />
+            <End Role="ExcelFile1" EntitySet="ExcelFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExclusiveCompany_ExclusiveCompany" Association="Self.FK_ExclusiveCompany_ExclusiveCompany">
+            <End Role="ExclusiveCompany" EntitySet="ExclusiveCompany" />
+            <End Role="ExclusiveCompany1" EntitySet="ExclusiveCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item1" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RatePrice_RatePrice" Association="Self.FK_RatePrice_RatePrice">
+            <End Role="RatePrice" EntitySet="RatePrice" />
+            <End Role="RatePrice1" EntitySet="RatePrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_UserProfile" Association="Self.FK_UserProfile_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserProfile1" EntitySet="UserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="masterEntities">
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="masterModel.Districts">
+              <MappingFragment StoreEntitySet="Districts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameInThai" ColumnName="NameInThai" />
+                <ScalarProperty Name="NameInEnglish" ColumnName="NameInEnglish" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExcelData">
+            <EntityTypeMapping TypeName="masterModel.ExcelData">
+              <MappingFragment StoreEntitySet="ExcelData">
+                <ScalarProperty Name="DataId" ColumnName="DataId" />
+                <ScalarProperty Name="ExcelId" ColumnName="ExcelId" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Crossdock" ColumnName="Crossdock" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="PO_NO" ColumnName="PO_NO" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="APC_Order" ColumnName="APC_Order" />
+                <ScalarProperty Name="DeliverId" ColumnName="DeliverId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductDetail" ColumnName="ProductDetail" />
+                <ScalarProperty Name="Box" ColumnName="Box" />
+                <ScalarProperty Name="Piece" ColumnName="Piece" />
+                <ScalarProperty Name="CBM" ColumnName="CBM" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExcelFile">
+            <EntityTypeMapping TypeName="masterModel.ExcelFile">
+              <MappingFragment StoreEntitySet="ExcelFile">
+                <ScalarProperty Name="ExcelId" ColumnName="ExcelId" />
+                <ScalarProperty Name="NameFile" ColumnName="NameFile" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExclusiveCompany">
+            <EntityTypeMapping TypeName="masterModel.ExclusiveCompany">
+              <MappingFragment StoreEntitySet="ExclusiveCompany">
+                <ScalarProperty Name="ExclusiveId" ColumnName="ExclusiveId" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="masterModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ExclusiveId" ColumnName="ExclusiveId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="masterModel.Provinces">
+              <MappingFragment StoreEntitySet="Provinces">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameInThai" ColumnName="NameInThai" />
+                <ScalarProperty Name="NameInEnglish" ColumnName="NameInEnglish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RatePrice">
+            <EntityTypeMapping TypeName="masterModel.RatePrice">
+              <MappingFragment StoreEntitySet="RatePrice">
+                <ScalarProperty Name="RateId" ColumnName="RateId" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ExclusiveId" ColumnName="ExclusiveId" />
+                <ScalarProperty Name="Exclusive" ColumnName="Exclusive" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="RatePrice1" ColumnName="RatePrice" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subdistricts">
+            <EntityTypeMapping TypeName="masterModel.Subdistricts">
+              <MappingFragment StoreEntitySet="Subdistricts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameInThai" ColumnName="NameInThai" />
+                <ScalarProperty Name="NameInEnglish" ColumnName="NameInEnglish" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="masterModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

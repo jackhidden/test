@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b1f5691a65e4826a58f14896e0b5fb9" Name="Diagram1">
+        <EntityTypeShape EntityType="masterModel.Districts" Width="1.5" PointX="5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.ExcelData" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.ExcelFile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.ExclusiveCompany" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.Item" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.Provinces" Width="1.5" PointX="2.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.RatePrice" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.Subdistricts" Width="1.5" PointX="7.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.UserProfile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="masterModel.FK_Districts_Provinces" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_Subdistricts_Districts" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_ExcelData1_ExcelData1" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_ExcelFile_ExcelFile" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_ExclusiveCompany_ExclusiveCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_Item_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_RatePrice_RatePrice" ManuallyRouted="false" />
+        <AssociationConnector Association="masterModel.FK_UserProfile_UserProfile" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

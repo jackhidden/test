@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Company";
+}
+@{
+    String Name = ViewBag.User.Name;
+    int UserId = ViewBag.User.UserId;
+}
+<link href="~/Content/plugins/datatables.net-bs/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables.net-bs/responsive.dataTables.min.css" rel="stylesheet" />
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        บริษัทสินค้า
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-table"></i> ตั้งค่า</a></li>
+        <li class="active">บริษัทสินค้า</li>
+    </ol>
+</section>
+<input id="userid" type="hidden" value="@UserId">
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">ตารางบริษัทเจ้าของสินค้า</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                                <button id="company-show-add-modal" class="btn btn-success pull-left">เพิ่มข้อมูลบริษัทเจ้าของสินค้า</button>
+                            </div>
+                        <div class="col-lg-6">
+                            <br />
+                            <table id="company-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อบริษัท</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<div class="modal fade" id="company-add-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">เพิ่มข้อมูลบริษัทเจ้าของสินค้า</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อบริษัท :</div>
+                        <div class="col-sm-10"><input id="company-add-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="company-add-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="company-edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">แก้ไขข้อมูลบริษัทเจ้าของสินค้า</h4>
+            </div>
+            <div class="modal-body">
+                <input id="company-edit-id" type="hidden" class="form-control input-sm" />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อบริษัท :</div>
+                        <div class="col-sm-10"><input id="company-edit-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="company-edit-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/jquery.dataTables.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net-bs/dataTables.bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/select2/select2.full.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/dataTables.responsive.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/logisitcs/exclusive.js")'></script>

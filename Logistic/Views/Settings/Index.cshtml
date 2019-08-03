@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Settings Rate Price";
+}
+<link href="~/Content/plugins/datatables.net-bs/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables.net-bs/responsive.dataTables.min.css" rel="stylesheet" />
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        ตั้งค่าเรทราคา
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-table"></i> ตั้งค่า</a></li>
+        <li class="active">เรทราคา</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">ตารางเรทราคา</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                            <div class="col-sm-3" style="padding:0px;">
+                                <div class="form-group">
+                                    <label class="col-sm-2" style="padding:0px;">บริษัท</label>
+                                    <div class="col-sm-7" style="padding:0px;">
+                                        <select id="rateprice-exclusive-slc" class="form-control"></select>
+                                    </div>
+                                    <button class="col-sm-3 btn btn-sm btn-danger" type="button" id="rateprice-exclusive-clear">ล้างข้อมูล</button>
+                                </div>
+                            </div>
+                            <button id="rateprice-show-add-modal" class="btn btn-success pull-right">เพิ่มข้อมูลเรทราคา</button>
+                        </div>
+                        <div class="col-lg-12">
+                            <br />
+                            <table id="rateprcice-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>จังหวัด</th>
+                                        <th>อำเภอ</th>
+                                        <th>ค่าขนส่ง(บาท)ต่อ กก.</th>
+                                        <th>บริษัท</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<div class="modal fade" id="rateprcice-add-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">เพิ่มข้อมูลเรทราคา</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ประเภท :</div>
+                        <div class="col-sm-10">
+                            <select id="rateprice-add-exclusive-slc" class="form-control select2" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">จังหวัด :</div>
+                        <div class="col-sm-10">
+                            <select id="rateprcice-add-province" class="form-control select2" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">อำเภอ :</div>
+                        <div class="col-sm-10">
+                            <select id="rateprcice-add-district" class="form-control select2" style="width: 100%;" disabled></select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-4">ค่าขนส่ง(บาท)ต่อ กก. :</div>
+                        <div class="col-sm-8"><input id="rateprcice-add-rate" type="number" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="rateprcice-add-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rateprcice-edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">แก้ไขข้อมูลเรทราคา</h4>
+            </div>
+            <div class="modal-body">
+                <input id="rateprcice-edit-rate-id" type="hidden" class="form-control input-sm" />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ประเภท :</div>
+                        <div class="col-sm-10">
+                            <select id="rateprice-edit-exclusive-slc" class="form-control select2" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">จังหวัด :</div>
+                        <div class="col-sm-10">
+                            <select id="rateprcice-edit-province" class="form-control select2" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">อำเภอ :</div>
+                        <div class="col-sm-10"><select id="rateprcice-edit-district" class="form-control select2" style="width: 100%;"></select></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-4">ค่าขนส่ง(บาท)ต่อ กก. :</div>
+                        <div class="col-sm-8"><input id="rateprcice-edit-rate" type="number" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="rateprcice-edit-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/jquery.dataTables.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net-bs/dataTables.bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/select2/select2.full.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/dataTables.responsive.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/logisitcs/rateprice.js")'></script>

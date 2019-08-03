@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Download";
+}
+
+@{
+    String Name = ViewBag.User.Name;
+    int UserId = ViewBag.User.UserId;
+    String ExcelName = ViewBag.ExcelFile.NameFile;
+    int ExcelId = ViewBag.ExcelFile.ExcelId;
+}
+<link href="~/Content/plugins/datatables.net-bs/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables.net-bs/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/downloadExcel/buttons.dataTables.min.css" rel="stylesheet" />
+
+<input id="excel-data-excelfile-id" type="hidden" value="@ExcelId">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        ดาวน์โหลดไฟล์ Excel
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-table"></i> Excel</a></li>
+        <li class="active">ดาวน์โหลดไฟล์ Excel</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">ข้อมูลไฟล์ Excel @ExcelName</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @*<div class="col-lg-12">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-2" style="padding:0px;">วันที่</label>
+                                        <div class="input-group date col-sm-10" style="padding:0px;">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" id="datepicker">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-2" style="padding:0px;">พนักงาน</label>
+                                        <div class="col-sm-10" style="padding:0px;">
+                                            <select class="form-control">
+                                                <option>ทั้งหมด</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-success">กรองข้อมูล</button>
+                                    <button class="btn btn-danger">ล้างค่า</button>
+                                </div>
+                            </div>*@
+                        <div class="col-lg-12">
+                            <br />
+                            @if (UserId == 1)
+                            {
+                                <table id="excel-data-table-admin" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Crossdock</th>
+                                            <th>ชื่อสินค้า</th>
+                                            <th>PO/No.</th>
+                                            <th>Invoice No.</th>
+                                            <th>APC Order</th>
+                                            <th>Deliver ID</th>
+                                            <th>รหัสร้านค้า</th>
+                                            <th>วันที่</th>
+                                            <th>จังหวัด</th>
+                                            <th>อำเภอ</th>
+                                            <th>ชื่อร้านค้า</th>
+                                            <th>รหัสสินค้า</th>
+                                            <th>รายละเอียดสินค้า</th>
+                                            <th>กล่อง</th>
+                                            <th>ชิ้น</th>
+                                            <th>CBM</th>
+                                            <th>น้ำหนัก</th>
+                                            <th>category</th>
+                                            <th>หมายเหตุ</th>
+                                            <th>Week</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <table id="excel-data-table" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Crossdock</th>
+                                            <th>ชื่อสินค้า</th>
+                                            <th>PO/No.</th>
+                                            <th>Invoice No.</th>
+                                            <th>APC Order</th>
+                                            <th>Deliver ID</th>
+                                            <th>รหัสร้านค้า</th>
+                                            <th>วันที่</th>
+                                            <th>จังหวัด</th>
+                                            <th>อำเภอ</th>
+                                            <th>ชื่อร้านค้า</th>
+                                            <th>รหัสสินค้า</th>
+                                            <th>รายละเอียดสินค้า</th>
+                                            <th>กล่อง</th>
+                                            <th>ชิ้น</th>
+                                            <th>CBM</th>
+                                            <th>น้ำหนัก</th>
+                                            <th>category</th>
+                                            <th>หมายเหตุ</th>
+                                            <th>Week</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/jquery.dataTables.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net-bs/dataTables.bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/select2/select2.full.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/dataTables.responsive.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/dataTables.buttons.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/buttons.flash.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/jszip.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/pdfmake.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/vfs_fonts.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/buttons.html5.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/downloadExcel/buttons.print.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/logisitcs/downloadexcel.js")'></script>

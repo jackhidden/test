@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "จัดการพนักงาน";
+}
+<link href="~/Content/plugins/datatables.net-bs/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables.net-bs/responsive.dataTables.min.css" rel="stylesheet" />
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        จัดการพนักงาน
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-table"></i> ตั้งค่า</a></li>
+        <li class="active">พนักงาน</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">ตารางจัดการพนักงาน</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                            <div class="col-sm-3" style="padding:0px;">
+                                <button id="employee-add-modal-show" class="btn btn-primary" data-toggle="modal" data-target="#employee-add-modal">เพิ่มพนักงาน</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <br />
+                            <table id="employee-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อผู้ใช้</th>
+                                        <th>รหัสผ่าน</th>
+                                        <th>ชื่อ</th>
+                                        <th>นามสกุล</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<div class="modal fade" id="employee-add-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">เพิ่มรหัสพนักงาน</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อผู้ใช้ :</div>
+                        <div class="col-sm-10"><input id="employee-username" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">รหัสผ่าน :</div>
+                        <div class="col-sm-10"><input id="employee-password" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อ :</div>
+                        <div class="col-sm-10"><input id="employee-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">สกุล :</div>
+                        <div class="col-sm-10"><input id="employee-surname" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="employee-add-btn" type="button" class="btn btn-success">เพิ่มพนักงาน</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="employee-edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">เพิ่มรหัสพนักงาน</h4>
+            </div>
+            <div class="modal-body">
+                <input id="employee-edit-user-id" type="hidden" class="form-control input-sm" />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อผู้ใช้ :</div>
+                        <div class="col-sm-10"><input id="employee-edit-username" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">รหัสผ่าน :</div>
+                        <div class="col-sm-10"><input id="employee-edit-password" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อ :</div>
+                        <div class="col-sm-10"><input id="employee-edit-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">สกุล :</div>
+                        <div class="col-sm-10"><input id="employee-edit-surname" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="employee-edit-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/jquery.dataTables.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net-bs/dataTables.bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/dataTables.responsive.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/logisitcs/employee.js")'></script>

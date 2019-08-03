@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Item";
+}
+@{
+    String Name = ViewBag.User.Name;
+    int UserId = ViewBag.User.UserId;
+    String Company = ViewBag.Company.Company;
+    int ExclusiveId = ViewBag.Company.ExclusiveId;
+}
+<link href="~/Content/plugins/datatables.net-bs/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables.net-bs/responsive.dataTables.min.css" rel="stylesheet" />
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        รายการสินค้าของบริษัท @Company
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-table"></i> ตั้งค่า</a></li>
+        <li><a href="#"><i class="fa fa-table"></i> บริษัทสินค้า</a></li>
+        <li class="active">ตารางสินค้า</li>
+    </ol>
+</section>
+<input id="userid" type="hidden" value="@UserId">
+<input id="exclusiveId" type="hidden" value="@ExclusiveId">
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">รายการสินค้าของบริษัท</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-lg-12">
+                            <button id="item-show-add-modal" class="btn btn-success pull-left">เพิ่มข้อมูลสินค้า</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <br />
+                            <table id="item-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อสินค้า</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<div class="modal fade" id="item-add-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">เพิ่มข้อมูลสินค้า</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อสินค้า :</div>
+                        <div class="col-sm-10"><input id="item-add-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="item-add-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="item-edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">แก้ไขข้อมูลสินค้า</h4>
+            </div>
+            <div class="modal-body">
+                <input id="item-edit-id" type="hidden" class="form-control input-sm" />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-sm-2">ชื่อสินค้า :</div>
+                        <div class="col-sm-10"><input id="item-edit-name" class="form-control input-sm" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                <button id="item-edit-btn" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/jquery.dataTables.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net-bs/dataTables.bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/select2/select2.full.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/datatables.net/dataTables.responsive.min.js")'></script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/logisitcs/item.js")'></script>
